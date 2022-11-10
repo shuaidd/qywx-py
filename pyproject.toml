@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qywx-py"
+version = "0.0.1"
+authors = [
+  { name="ddshuai", email="shuaidd@139.com" },
+]
+description = "企业微信API客户端"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/shuaidd/qywx-py"
+"Bug Tracker" = "https://github.com/shuaidd/qywx-py/issues"
