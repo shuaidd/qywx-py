@@ -17,3 +17,9 @@ class User:
 
     def getUser(self, appname, user_id):
         return self.client.httpGet(appname, '/user/get', {"userid": user_id})
+
+    def deleteUser(self, appname, user_id):
+        return self.client.httpGet(appname, '/user/delete', {"userid": user_id})
+
+    def batchDeleteUser(self, appname, data):
+        return self.client.httpPost(appname, '/user/batchdelete', data)
