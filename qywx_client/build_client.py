@@ -8,3 +8,4 @@ class Client:
         self.tagApi = UserTag(clt)
         self.departmentApi = Department(clt)
         self.messageApi = Message(clt)
+        self.mediaApi = Media(clt)

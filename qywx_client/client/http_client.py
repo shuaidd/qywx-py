@@ -92,9 +92,27 @@ class HttpClient(HttpClientConfig):
 
         raise Exception('企业微信接口调用失败-->', return_val['errcode'], return_val['errmsg'])
 
-    def httpGet(self, appname="", uri="", params=None):
+    def httpFormDataPost(self, appname, uri, form_data, params=None):
+        access_token = self.getAccessToken(appname)
+
+        if params is None:
+            params = {}
+
+        params['access_token'] = access_token
+        params['debug'] = 1
+        response = requests.post(self.baseUrl + uri, params=params,
+                                 data=form_data, headers={'Content-Type': 'multipart/form-data'})
+
+        return_val = response.json()
+        if return_val['errcode'] == 0:
+            return return_val
+
+        raise Exception('企业微信接口调用失败-->', return_val['errcode'], return_val['errmsg'])
+
+    def httpGet(self, appname="", uri="", params=None, stream=None):
         """
         发送get请求
+        :param stream:
         :param appname: 企业微信应用名称
         :param uri: 企业微信接口地址
         :param params: 参数
@@ -105,7 +123,11 @@ class HttpClient(HttpClientConfig):
         access_token = self.getAccessToken(appname)
         params['access_token'] = access_token
         params['debug'] = 1
-        response = requests.get(self.baseUrl + uri, params=params)
+        response = requests.get(self.baseUrl + uri, params=params, stream=stream)
+
+        if stream:
+            return response
+
         return_val = response.json()
         if return_val['errcode'] == 0:
             return return_val
